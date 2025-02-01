@@ -1,5 +1,7 @@
 # Datacom Projects
 
+No privileged information is stored in this repository.
+
 What:
  - Scripts written in PowerShell to support the DIA Service Desk
  - The scripts here automate/simplify some manual processes done by the Service Desk
