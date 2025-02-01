@@ -1,0 +1,24 @@
+Q: The AD group cannot be found but that's the name in AD!
+A: Search for the group in AD and double-click on it and make sure the "Group name" is the same
+   The group name is what we want but sometimes it's different to the display name
+
+Q: The AD group cannot be found, but I've copied the group name correctly.
+A: If the group has more than 5000 members, it will successfully fail in order to protect the shell from overloading
+
+Q: It still says the group wasn't found...
+A: Perhaps there is a bug in the code (oopsies)
+
+Q: When would I need to use get_group_members_csv.ps1 ?
+A: If you want the results to be in a spreadsheet, or need other details like the members' usernames, emails, etc.
+
+Q: Where is my CSV?
+A: It's in the Exported Member Lists folder in this directory; it has the group name and today's date in its name
+
+Q: When I open the CSV, it's all on one line. Help. (Or any other weird looking format)
+A: Copy it to your local machine and open it in Excel (Voila!)
+
+Q: I want to get member information that is not in the CSV.
+A: Let me know, I'll whip up something for you.
+
+Q: I need multiple groups members lists in one CSV.
+A: Do not fret, I can do this for you, let me know.

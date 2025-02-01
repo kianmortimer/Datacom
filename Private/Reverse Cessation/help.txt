@@ -1,0 +1,9 @@
+Q: What is reverse_cessation_parse_html.ps1 ?
+A: Basically, if you were to go to an MSP cessation and try to add all the AD groups back to the 
+   user's account, you only need to do one action to copy all the groups, instead of copying them all individually.
+   - Refer to the guide on how to do this: reverse_cessation_parse_html - Guide.pdf
+
+Q: Why is Active Directory frozen? When I have the PowerShell window open, I can't use AD...
+A: Yeah, I have noticed this and googling it didn't tell me anything.
+   I suspect it's because the PowerShell window is loading AD, the other instances of AD pauses.
+   To get around this, just close the PowerShell window to then use AD.

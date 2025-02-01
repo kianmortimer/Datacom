@@ -1,0 +1,23 @@
+Q: I don't know which script I need to run.
+A: So you'll probably want to use the default "loginstats". 
+   You can copy this to your Desktop or wherever else you want it.
+
+Q: How do I use this?
+A: Copy a user's username from AD and then run the script; the correct device name will be copied to your clipboard.
+
+Q: I want to find out which user used a device last, not the device that a user used last.
+A: Fear not, just copy the device name and run the loginstats script. 
+   It won't copy the user to the clipboard, but you will be able to see it in the output and copy it from there.
+
+Q: What's the point of using this instead of just searching loginstats.txt the normal way?
+A: There isn't a need for this, but it is simpler and quicker to use.
+
+Q: What does the loginstats_history script do?
+A: If you search by user, it will get the last 5 logins and the devices that the user logged into.
+   If you search by device, it will get the last 5 logins and the users that logged into the device.
+
+Q: How many acres are in a hectare?
+A: I have no idea.
+
+Q: I am not very intelligent and need more help. Please?
+A: This stuff is confusing, don't worry (Handshake).
