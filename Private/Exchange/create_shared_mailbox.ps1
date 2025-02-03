@@ -50,6 +50,8 @@ $mbx_group_location = "OU=Shared Mailbox Access Groups,OU=Groups,OU=Production,O
 Write-Host
 Write-Host " Create Shared Mailbox Script"
 Write-Host " Enter the email address and voila!"
+Write-Host " - Any spaces put in the name will be removed to create the email"
+Write-Host " - You will need to update the display name after creation if required"
 Write-Host
 
 # Connect to Exchange Online
@@ -66,7 +68,7 @@ $email = $null
     Write-Host
 	
 	# Get the email address of the mailbox from user
-	$email = Read-Host " Enter Email Address" | ForEach-Object -Process { if ($_) { $_.Trim() } }
+	$email = Read-Host " Enter Email Address or Name" | ForEach-Object -Process { if ($_) { $_.Trim().Replace(" ","") } }
 
     # Lower Boundary Test
     if ($null -eq $email -or $email.length -lt $min_length) {
