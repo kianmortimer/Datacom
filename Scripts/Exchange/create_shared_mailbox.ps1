@@ -272,6 +272,10 @@ Write-Host " You can check the results in EOP and AD"
 Write-Host " - It is safe to delete the mailbox directly from EOP"
 Write-Host "   and safe to delete the MBX group directly from AD"
 Write-Host
+Write-Host " You can update the display name if needed"
+Write-Host " - If the display name should be different to the"
+Write-Host "   email address, then now is the best time to update it"
+Write-Host
 Write-Host " The mailbox has NOT been migrated"
 Write-Host " - If this is needed, it will need to be done separately"
 Write-Host " - It may take 15-20 minutes to appear when migrating"
