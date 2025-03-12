@@ -2,8 +2,8 @@
 
 Title:   create_shared_mailbox.ps1
 Author:  kian.mortimer@datacom.com
-Date:    24/01/25
-Version: 1.2
+Date:    20/02/25
+Version: 2.0
 
 Description:
 - Script to create a shared mailbox
@@ -53,13 +53,6 @@ Write-Host " Enter the email address and voila!"
 Write-Host " - Any spaces put in the name will be removed to create the email"
 Write-Host " - You will need to update the display name after creation if required"
 Write-Host
-
-# Connect to Exchange Online
-Write-Host " > Authenticating with Exchange Online..."
-# This will automatically prompt for authentication through Microsoft
-# Script will be terminated if authentication is not complete
-Connect-ExchangeOnline
-Write-Host " > Authenticated; continuing..."
 
 $name = $null
 $email = $null
@@ -279,7 +272,10 @@ Write-Host
 Write-Host " The mailbox has NOT been migrated"
 Write-Host " - If this is needed, it will need to be done separately"
 Write-Host " - It may take 15-20 minutes to appear when migrating"
+Write-Host " - Once migrated, you will need to rerun the MessageCopy commands"
+Write-Host "   Do this by running enable_messagecopy_settings.ps1"
 Write-Host
+
 
 # Hold the window open after script completion
 Read-Host -Prompt " Press [Enter] to exit"
