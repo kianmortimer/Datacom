@@ -41,7 +41,7 @@ $formats = @( @(0, 2, 1) , @(1, 0, 2) , @(1, 1, 0, 1) )
 # set up file paths
 $file_paths = @()
 foreach ($word_length in $word_lengths) {
-    $file_paths += "C:\Users\sa-mortimki\Documents\Scripts\Passwords\Word Lists\$($word_length)_letter_words.txt"
+    $file_paths += "C:\SD Datacom Tools\burgerking\Passwords\Word Lists\$($word_length)_letter_words.txt"
 }
 
 # read word files into 2d array
