@@ -2,22 +2,19 @@
 
 Title:   get_group_members.ps1
 Author:  kian.mortimer@datacom.com
-Date:    07/06/24
-Version: 1.6
+Date:    15/03/25
+Version: 2.1
 
 Description: 
-- Script to get the members of an AD group and copy them to the clipboard
-
-How-to:
-- Ever been asked for a list of users that have access to a mailbox?
-- This script aims to make the process easier by eliminating the need 
-- to copy the members individually from Active Directory.
+- Script to get the members of an AD group
+- Copies the list to the clipboard and generates a CSV
 
 Workflow:
 - Run this script and enter in the AD group you wish to get the members of
 - For example: "MBX_tearatahi" would give you the list of users that have 
   access to that mailbox
 - The list will automatically be copied to the clipboard (Wow!)
+- A CSV file will also be generated
 
 Help:
 - Google the functions or ask me what's up
@@ -34,6 +31,7 @@ Write-Host "* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *"
 Write-Host "* Get Members of an Active Directory Security Group           *"
 Write-Host "* Enter the name of the AD group into the prompt below        *"
 Write-Host "* Member list will be AUTOMATICALLY copied to the clipboard   *"
+Write-Host "* A CSV file will also be generated with the results          *"
 Write-Host "*                                                             *"
 Write-Host "* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *"
 Write-Host
@@ -69,44 +67,46 @@ $first = $true
 		"None" | Set-Clipboard
 		continue
 	}
+
+    # If list is empty, advise user and copy placeholder "None" to clipboard
+    if (!$members -or $members.count -lt 1) {
+        Write-Host " > `"$user_input`" has no members.`n"
+		"None" | Set-Clipboard
+        continue
+    }
 	
 	# Sort the member list alphabetically
-	$members = $members | Sort-Object -Property Name
+	$members = $members | Sort-Object @{Expression = "ObjectClass"; Descending = $true},
+                          @{Expression = "Name"; Descending = $false}
 	
-	# Split the member list into users and any other members
-	$members_user = $members | Where-Object { $_.ObjectClass -eq "user" }
-	$members_other = $members | Where-Object { $_.ObjectClass -ne "user" }
+    # Initialise output variables
+	$rows = [System.Collections.Generic.list[PSCustomObject]]::new()
+    $members_string = ""
 
-	Write-Host
-	
-	# Format the list to output
-	$members_string = ""
-	
-	# Put users into the list
-	foreach ($user in $members_user) {
-		$user = Get-ADUser -Identity $user.DistinguishedName -Properties *
-		$members_string = $members_string + "$($user.Name)$( if ($user.Enabled -ne "True") { " [Disabled Account]" } )`n" #
-	}
-	# Put other member types into list if applicable
-	if ($members_other.count -gt 0) {
-		$members_string = $members_string + "`n"
-		foreach ($other in $members_other) {
-			$members_string = $members_string + "$($other.Name)`n"
-		}
-	}
-	
-	# Check if the member list is empty
-	if (!$members_string) {
-		# If list is empty, advise user and copy placeholder "None" to clipboard
-		Write-Host " > `"$user_input`" has no members.`n"
-		"None" | Set-Clipboard
-	} else {
-		# If list is not empty, paste the list and copy it to the clipboard
-		#$members_string = " > ($($members.count)) members`n" + $members_string
-		Write-Host " > ($($members.count)) members`n"
-		Write-Host $members_string
-		$members_string | Set-Clipboard
-	}
+    # Format object properties
+    foreach ($member in $members) {
+        $object = [PSCustomObject]@{
+            "Class" = $member.ObjectClass
+            "Name" = $member.Name
+            "Username" = $member.SAMAccountName
+            "Email" = $member.mail
+            "DistinguishedName" = $member.DistinguishedName
+        }
+        $rows.add($object)
+        $members_string = $members_string + "$($member.Name)`n"
+    }
+    
+    # Print output and copy list to clipboard
+    Write-Host
+    Write-Host " > ($($rows.count)) members`n"
+	Write-Host $members_string
+	$members_string | Set-Clipboard
+
+    # Export to CSV
+    Write-Host " > Exporting list..."
+    $rows | Export-Csv -Path "C:\Users\sa-mortimki\Documents\Scripts\Active Directory\AD Get Users\Exported Member Lists\$($user_input) $(Get-Date -Format 'dd-MM-yy').csv" -NoTypeInformation
+    Write-Host " >>> Exported Member Lists\$($user_input) $(Get-Date -Format 'dd-MM-yy').csv"
+
 }
 
 # Insert Eminem and Dr Dre headbanging in the lambo gif
