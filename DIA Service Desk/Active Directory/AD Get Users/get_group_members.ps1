@@ -104,7 +104,7 @@ $first = $true
 
     # Export to CSV
     Write-Host " > Exporting list..."
-    $rows | Export-Csv -Path "C:\Users\sa-mortimki\Documents\Scripts\Active Directory\AD Get Users\Exported Member Lists\$($user_input) $(Get-Date -Format 'dd-MM-yy').csv" -NoTypeInformation
+    $rows | Export-Csv -Path "C:\SD Datacom Tools\burgerking\Active Directory\AD Get Users\Exported Member Lists\$($user_input) $(Get-Date -Format 'dd-MM-yy').csv" -NoTypeInformation
     Write-Host " >>> Exported Member Lists\$($user_input) $(Get-Date -Format 'dd-MM-yy').csv"
 
 }
