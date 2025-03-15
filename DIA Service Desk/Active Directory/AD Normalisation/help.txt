@@ -1,2 +1,0 @@
-Q: I don't know what these scripts are for.
-A: They're pretty random; just made for searching AD for any weird things with accounts (e.g. Name is in all caps)
