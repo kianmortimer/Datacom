@@ -129,7 +129,7 @@ $first = $true
 
         # Export to CSV
         Write-Host " > Exporting list..."
-        $rows | Export-Csv -Path "C:\SD Datacom Tools\burgerking\Login Stats\Exported Lists\Match Users To Devices $(Get-Date -Format 'dd-MM-yy').csv" -NoTypeInformation
+        $rows | Export-Csv -Path ".\Exported Lists\Match Users To Devices $(Get-Date -Format 'dd-MM-yy').csv" -NoTypeInformation
         Write-Host " >>> Exported Lists\Match Users To Devices $(Get-Date -Format 'dd-MM-yy').csv"
 
     } else {
