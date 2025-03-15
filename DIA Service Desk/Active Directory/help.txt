@@ -8,9 +8,6 @@ A: If the group has more than 5000 members, it will successfully fail in order t
 Q: It still says the group wasn't found...
 A: Perhaps there is a bug in the code (oopsies)
 
-Q: When would I need to use get_group_members_csv.ps1 ?
-A: If you want the results to be in a spreadsheet, or need other details like the members' usernames, emails, etc.
-
 Q: Where is my CSV?
 A: It's in the Exported Member Lists folder in this directory; it has the group name and today's date in its name
 
