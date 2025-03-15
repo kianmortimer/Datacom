@@ -6,18 +6,12 @@ Date:    15/03/25
 Version: 1.0
 
 Description: 
-- Script to find the most recent login of DIA user or device
-- Search by username or device name (e.g. "mortimki" or "T111A-LXXXXXXXX")
-- The search is not case-sensitive (e.g. "mortimki" == "MORTIMKI")
-- The search will return the username, device name, and more
-- The device name will automatically get copied to your clipboard
-- To copy anything else, use the shortcut "Ctrl+Shift+C" or right-click
+- Script to match a list of users to their devices and vice versa
 
-Warning:
-- Make any changes to this script at your own risk; PowerShell is OP
-- This script does not make any changes or modifications, it only reads
-- This script can be safely terminated at any stage by closing the window, 
-- or using the KeyboardInterrupt shortcut "Ctrl+C"
+Workflow:
+- Run the script and paste a list of usernames or device names or a mix
+- The user and device name will automatically get copied to your clipboard and displayed
+- CSV will be generated with more detailed information
 
 Help:
 - Google the functions or ask me what's up
@@ -65,10 +59,10 @@ $first = $true
 		$first = $false
 		# If it's the first loop; auto-paste the content in the user's clipboard
 		$user_input = Get-Clipboard | ForEach-Object -Process { if ($_) { $_.Trim() } }
-		Write-Host  " Enter usernames/devices: $($user_input)"
+		Write-Host  " Enter list: $($user_input)"
 	} else {
 		# If it's not the first loop; get the user input normally
-		$user_input = Read-Host " Enter username/devices" | ForEach-Object -Process { if ($_) { $_.Trim() } }
+		$user_input = Read-Host " Enter list" | ForEach-Object -Process { if ($_) { $_.Trim() } }
 	}
     Write-Host
 
@@ -135,7 +129,7 @@ $first = $true
 
         # Export to CSV
         Write-Host " > Exporting list..."
-        $rows | Export-Csv -Path "C:\Users\sa-mortimki\Documents\Scripts\Login Stats\Exported Lists\Match Users To Devices $(Get-Date -Format 'dd-MM-yy').csv" -NoTypeInformation
+        $rows | Export-Csv -Path "C:\SD Datacom Tools\burgerking\Login Stats\Exported Lists\Match Users To Devices $(Get-Date -Format 'dd-MM-yy').csv" -NoTypeInformation
         Write-Host " >>> Exported Lists\Match Users To Devices $(Get-Date -Format 'dd-MM-yy').csv"
 
     } else {
@@ -145,4 +139,4 @@ $first = $true
     
 }
 
-# Why are you here?
+# im just waiting for a mate
